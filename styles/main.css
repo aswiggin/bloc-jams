@@ -84,3 +84,6 @@ html {
 .links-container .navbar-link:hover {
     color: rgb(233,50,117);
 }
+.links-container:active {
+  background-color: white;
+}
