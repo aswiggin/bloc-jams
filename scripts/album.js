@@ -56,13 +56,15 @@ for (var i = 0; i < album.songs.length; i++) {
 }
 };
 var findParentByClassName = function(element, targetClass){
-  if (element) {
-    var currentParent = element.parentElement;
-    while (currentParent.className !== targetClass && currentParent.className !== null) {
-      currentParent = element.parentElement;
-    }
-    return currentParent;
+var ancestor = element.parentNode;
+  if (element.parentNode == null){
+    console.log("No parent found");
   }
+  while (ancestor != null) {
+    if (ancestor.classList != targetClass){
+      console.log("No parent found with that class name");
+    }
+  } return null;
 };
 var getSongItem = function(element, name) {
   switch (element.className) {
