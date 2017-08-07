@@ -1,4 +1,4 @@
-var albumPicassy = {
+var albumPicasso = {
   title: "The Colors",
   artist: "Pablo Picasso",
   label: "Cubism",
@@ -26,6 +26,20 @@ var albumMarconi = {
     { title: 'Wrong phone number', duration: '2:15'}
 ]
 };
+var albumSaba = {
+  title: 'Bucket List Project',
+  artist: 'Saba',
+  label: 'EM',
+  year: '2016',
+  albumArtUrl: "assets/images/saba.jpg",
+  songs: [
+    { title: 'Stoney', duration: '3:31' },
+    { title: 'Westside Bound 3', duration: '2:57' },
+    { title: 'MOST', duration: '3:33'},
+    { title: 'Photosynthesis', duration: '3:22' },
+    { title: 'Bucket List', duration: '3:35'}
+]
+};
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
   '<tr class="album-view-song-item">'
@@ -36,12 +50,15 @@ var createSongRow = function(songNumber, songName, songLength) {
 ;
 return template;
 };
+
+var albumTitle = document.getElementsByClassName("album-view-title")[0];
+var albumArtist = document.getElementsByClassName("album-view-artist")[0];
+var albumReleaseInfo = document.getElementsByClassName("album-view-release-info")[0];
+var albumImage = document.getElementsByClassName("album-cover-art")[0];
+var albumSongList = document.getElementsByClassName("album-view-song-list")[0];
+
 var setCurrentAlbum = function(album) {
-  var albumTitle = document.getElementsByClassName("album-view-title")[0];
-  var albumArtist = document.getElementsByClassName("album-view-artist")[0];
-  var albumReleaseInfo = document.getElementsByClassName("album-view-release-info")[0];
-  var albumImage = document.getElementsByClassName("album-cover-art")[0];
-  var albumSongList = document.getElementsByClassName("album-view-song-list")[0];
+
   albumTitle.firstChild.nodeValue = album.title;
   albumArtist.firstChild.nodeValue = album.artist;
   albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -58,4 +75,13 @@ for (var i = 0; i < album.songs.length; i++) {
 
 window.onload = function() {
 setCurrentAlbum(albumPicasso);
+var albums = [albumPicasso, albumMarconi, albumSaba];
+var i = 1;
+albumImage.addEventListener("click", function(event) {
+  setCurrentAlbum(albums[i]);
+  i++;
+  if (i == albums.length){
+    i = 0;
+  }
+});
 };
