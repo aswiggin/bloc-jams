@@ -87,3 +87,6 @@ html {
 .container .narrow {
   max-width: 56rem;
 }
+.links-container:active{
+  background-color: white;
+}
