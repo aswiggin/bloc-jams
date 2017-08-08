@@ -81,6 +81,7 @@ var getSongItem = function(element, name) {
       return;
 }
 };
+
 var clickHandler = function(targetElement) {
   var songItem = getSongItem(targetElement);
   if (currentlyPlayingSong === null) {
@@ -89,7 +90,7 @@ var clickHandler = function(targetElement) {
   } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
         songItem.innerHTML = playButtonTemplate;
         currentlyPlayingSong = null;
-          } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
+    } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
          var currentlyPlayingSongElement = document.querySelector('[data-song-number="' + currentlyPlayingSong + '"]');
          currentlyPlayingSongElement.innerHTML = currentlyPlayingSongElement.getAttribute('data-song-number');
          songItem.innerHTML = pauseButtonTemplate;
@@ -101,10 +102,13 @@ var songRows = document.getElementsByClassName('album-view-song-item');
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 var currentlyPlayingSong = null;
+
 window.onload = function() {
 setCurrentAlbum(albumPicasso);
+
 songListContainer.addEventListener('mouseover', function(event) {
   if (event.target.parentElement.className === "album-view-song-item"){
+      event.target.parentElement.querySelector(".song-item-number").innerHTML = playButtonTemplate;
     var songItem = getSongItem(event.target);
     if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
                songItem.innerHTML = playButtonTemplate;
