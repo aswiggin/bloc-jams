@@ -29,7 +29,7 @@ var albumMarconi = {
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
   '<tr class="album-view-song-item">'
-  + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
++ '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
 + '  <td class="song-item-title">' + songName + '</td>'
 + '  <td class="song-item-duration">' + songLength + '</td>'
 + '</tr>'
@@ -86,7 +86,7 @@ var clickHandler = function(targetElement) {
   if (currentlyPlayingSong === null) {
     songItem.innerHTML = pauseButtonTemplate;
     currentlyPlayingSong = songItem.getAttribute('data-song-number');
-     } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
+  } else if (currentlyPlayingSong === songItem.getAttribute('data-song-number')) {
         songItem.innerHTML = playButtonTemplate;
         currentlyPlayingSong = null;
           } else if (currentlyPlayingSong !== songItem.getAttribute('data-song-number')) {
