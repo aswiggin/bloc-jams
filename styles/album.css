@@ -60,6 +60,7 @@ body.album {
 }
 .album-song-button {
     text-align: center;
+    vertical-align: baseline;
     font-size: 14px;
     background-color: white;
     color: rgb(210, 40, 123);
