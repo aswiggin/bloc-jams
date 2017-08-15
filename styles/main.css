@@ -34,6 +34,9 @@ html {
   margin: 0 auto;
   max-width: 64rem;
 }
+.container .narrow {
+  max-width: 56rem;
+}
 .clearfix::before,
 .clearfix::after {
    content: " ";
@@ -83,9 +86,6 @@ html {
   /* #5 */
 .links-container .navbar-link:hover {
     color: rgb(233,50,117);
-}
-.container .narrow {
-  max-width: 56rem;
 }
 .links-container:active{
   background-color: white;
