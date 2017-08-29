@@ -1,3 +1,4 @@
+
 var albumPicasso = {
     title: 'The Colors',
     artist: 'Pablo Picasso',
@@ -12,6 +13,8 @@ var albumPicasso = {
         { title: 'Magenta', duration: '2:15' }
     ]
 };
+
+//Another Example Album
 
 var albumMarconi = {
     title: 'The Telephone',
@@ -41,26 +44,30 @@ var createSongRow = function(songNumber, songName, songLength) {
 };
 
 var setCurrentAlbum = function(album) {
+    // #1
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
     var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
+    // #2
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
 
+    // #3
     albumSongList.innerHTML = '';
 
+    // #4
     for (var i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
 };
 
 var findParentByClassName = function(element, targetClass) {
-    if (element) {   // if element is not null or undefined
+    if (element) {   // in other words, if element is not null or undefined
         var currentParent = element.parentElement;
         while (currentParent.className != targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
@@ -74,7 +81,7 @@ var getSongItem = function(element) {
     switch (element.className) {
         case 'album-song-button':
         case 'ion-play':
-        case 'ion-pause':
+        case 'ion-pause':  // Not previously referenced in any code. How to know for ckpt 13?
             return findParentByClassName(element, 'song-item-number');
         case 'album-view-song-item':
             return element.querySelector('.song-item-number');
@@ -112,11 +119,16 @@ var clickHandler = function(targetElement) {
 
 };
 
+// The target parent element is the table with the class .album-view-song-list. Store the selected table in a variable and add a listener to it for the mouseover event in album.js
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 
 var songRows = document.getElementsByClassName('album-view-song-item');
+
+// Album button templates
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
+
+// Store state of playing songs
 var currentlyPlayingSong = null;
 
 window.onload = function() {
@@ -124,7 +136,9 @@ window.onload = function() {
 
     songListContainer.addEventListener('mouseover', function(event) {
 
+         // Target only individual song rows during event delegation (not all rows)
         if (event.target.parentElement.className === 'album-view-song-item') {
+            // Change the content from the track number to the play button's HTML, if it is not the currently playing track
             var songItem = getSongItem(event.target);
 
             if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
@@ -132,11 +146,14 @@ window.onload = function() {
             }
         }
      });
+    // The target property on the event object above stores the DOM element where the event occurred.
 
     for (var i = 0; i < songRows.length; i++) {
         songRows[i].addEventListener('mouseleave', function(event) {
+            // Revert the content back to the number (from the play button)
             var songItem = getSongItem(event.target);
             var songItemNumber = songItem.getAttribute('data-song-number');
+
             if (songItemNumber !== currentlyPlayingSong) {
                 songItem.innerHTML = songItemNumber;
             }
