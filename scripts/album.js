@@ -143,7 +143,7 @@ window.onload = function() {
         });
 
         songRows[i].addEventListener('click', function(event) {
-            clickHandler(event.target.firstChild);
+            clickHandler(event.target);
         });
 
     }
